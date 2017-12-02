@@ -1,11 +1,12 @@
 Name:           devedeng
-Version:        4.8.9
-Release:        2%{?dist}
+Version:        4.8.10
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3+
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://github.com/rastersoft/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:        %{name}.appdata.xml
 
 BuildArch:      noarch
 
@@ -15,6 +16,7 @@ Obsoletes:      devede < 4.0
 BuildRequires:  python3-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
+BuildRequires:  libappstream-glib
 #Requires:       mplayer
 #Requires:       mpv
 Requires:       vlc
@@ -76,8 +78,13 @@ mv %{buildroot}%{_datadir}/pixmaps/%{name}.svg \
   %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
 
 # Add docs
-install -m 644 HISTORY.md %{buildroot}%{_pkgdocdir}
-install -m 644 README.md %{buildroot}%{_pkgdocdir}
+install -p -m 644 HISTORY.md %{buildroot}%{_pkgdocdir}
+install -p -m 644 README.md %{buildroot}%{_pkgdocdir}
+
+# Install AppData file
+install -d %{buildroot}%{_datadir}/metainfo
+install -p -m 644 %{SOURCE1} %{buildroot}%{_datadir}/metainfo
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
 
 %find_lang %{name}
 
@@ -103,6 +110,7 @@ fi
 %{_datadir}/%{name}
 %{python3_sitelib}/%{name}*.egg-info
 %{python3_sitelib}/%{name}
+%{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 %exclude %{_mandir}/man1/devede.1*
@@ -111,6 +119,11 @@ fi
 
 
 %changelog
+* Sat Dec 02 2017 Andrea Musuruane <musuruan@gmail.com> 4.8.10-1
+- Updated to new upstream release
+- Added AppData file
+- Preserved timestamps
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 4.8.9-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
