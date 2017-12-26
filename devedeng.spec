@@ -1,12 +1,12 @@
 Name:           devedeng
-Version:        4.8.10
+Version:        4.8.11
 Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3+
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://github.com/rastersoft/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1:        %{name}.appdata.xml
+Source1:        devede_ng.py.appdata.xml
 
 BuildArch:      noarch
 
@@ -70,12 +70,10 @@ desktop-file-install \
   --delete-original \
   --add-category X-OutputGeneration \
   --dir %{buildroot}%{_datadir}/applications \
-  %{buildroot}%{_datadir}/applications/%{name}.desktop
+  %{buildroot}%{_datadir}/applications/devede_ng.py.desktop
 
-# Move icon into %%{_datadir}/icons/hicolor/
-mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps
-mv %{buildroot}%{_datadir}/pixmaps/%{name}.svg \
-  %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
+# Remove icon
+rm %{buildroot}%{_datadir}/pixmaps/%{name}.svg
 
 # Add docs
 install -p -m 644 HISTORY.md %{buildroot}%{_pkgdocdir}
@@ -110,15 +108,18 @@ fi
 %{_datadir}/%{name}
 %{python3_sitelib}/%{name}*.egg-info
 %{python3_sitelib}/%{name}
-%{_datadir}/metainfo/%{name}.appdata.xml
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+%{_datadir}/metainfo/devede_ng.py.appdata.xml
+%{_datadir}/applications/devede_ng.py.desktop
+%{_datadir}/icons/hicolor/scalable/apps/*.svg
 %exclude %{_mandir}/man1/devede.1*
 %doc %{_docdir}/%{name}
 %license COPYING
 
 
 %changelog
+* Tue Dec 26 2017 Andrea Musuruane <musuruan@gmail.com> 4.8.11-1
+- Updated to new upstream release
+
 * Sat Dec 02 2017 Andrea Musuruane <musuruan@gmail.com> 4.8.10-1
 - Updated to new upstream release
 - Added AppData file
