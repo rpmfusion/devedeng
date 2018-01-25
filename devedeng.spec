@@ -1,5 +1,5 @@
 Name:           devedeng
-Version:        4.8.11
+Version:        4.8.12
 Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -87,21 +87,6 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 %find_lang %{name}
 
 
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
-
 %files -f %{name}.lang
 %{_bindir}/devede_ng.py
 %{_bindir}/copy_files_verbose.py
@@ -117,6 +102,10 @@ fi
 
 
 %changelog
+* Thu Jan 25 2018 Andrea Musuruane <musuruan@gmail.com> 4.8.12-1
+- Updated to new upstream release
+- Removed obsolete scriptlets
+
 * Tue Dec 26 2017 Andrea Musuruane <musuruan@gmail.com> 4.8.11-1
 - Updated to new upstream release
 
