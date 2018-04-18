@@ -1,5 +1,5 @@
 Name:           devedeng
-Version:        4.8.12
+Version:        4.9.0
 Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -61,7 +61,6 @@ for lib in build/lib/devedeng/*.py; do
 done
 
 
-
 %install
 %py3_install 
 
@@ -102,6 +101,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Wed Apr 18 2018 Andrea Musuruane <musuruan@gmail.com> - 4.9.0-1
+- Updated to new upstream release
+
 * Thu Jan 25 2018 Andrea Musuruane <musuruan@gmail.com> 4.8.12-1
 - Updated to new upstream release
 - Removed obsolete scriptlets
