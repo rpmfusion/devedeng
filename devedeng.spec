@@ -1,5 +1,5 @@
 Name:           devedeng
-Version:        4.9.0
+Version:        4.10.0
 Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -101,6 +101,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Mon Apr 30 2018 Andrea Musuruane <musuruan@gmail.com> - 4.10.0-1
+- Updated to new upstream release
+
 * Wed Apr 18 2018 Andrea Musuruane <musuruan@gmail.com> - 4.9.0-1
 - Updated to new upstream release
 
