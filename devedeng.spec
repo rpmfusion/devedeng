@@ -1,11 +1,13 @@
+%global commit f0893b3ff7b14723bd148db35bdfe2d284156d19
+
 Name:           devedeng
-Version:        4.11.0
-Release:        2%{?dist}
+Version:        4.12.0
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3+
 URL:            http://www.rastersoft.com/programas/devede.html
-Source0:        https://github.com/rastersoft/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        https://gitlab.com/rastersoft/devedeng/repository/archive.tar.gz?ref=%{version}#/%{name}-%{version}.tar.gz
 Source1:        devede_ng.py.appdata.xml
 
 BuildArch:      noarch
@@ -47,7 +49,7 @@ to expand it and easily add new features.
 
 
 %prep
-%setup -q
+%autosetup -n %{name}-%{version}-%{commit}
 
 
 %build
@@ -101,6 +103,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sat Jun 30 2018 Andrea Musuruane <musuruan@gmail.com> - 4.12.0-1
+- Updated to new upstream release
+- Upstream git repository moved to gitlab
+
 * Thu May 17 2018 Andrea Musuruane <musuruan@gmail.com> - 4.11.0-2
 - Fixed AppData file
 
