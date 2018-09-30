@@ -2,7 +2,7 @@
 
 Name:           devedeng
 Version:        4.12.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3+
@@ -25,8 +25,7 @@ Requires:       vlc
 Requires:       ffmpeg
 Requires:       dvdauthor
 Requires:       vcdimager
-#Requires:       genisoimage
-Requires:       mkisofs
+Requires:       genisoimage
 Requires:       brasero
 #Requires:       k3b
 Requires:       ImageMagick
@@ -103,6 +102,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sun Sep 30 2018 Leigh Scott <leigh123linux@googlemail.com> - 4.12.0-4
+- Require genisoimage as mkisofs virtual provides was removed
+
 * Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 4.12.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
