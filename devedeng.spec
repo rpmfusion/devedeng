@@ -1,13 +1,11 @@
-%global commit f0893b3ff7b14723bd148db35bdfe2d284156d19
-
 Name:           devedeng
-Version:        4.12.0
-Release:        4%{?dist}
+Version:        4.13.0
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3+
 URL:            http://www.rastersoft.com/programas/devede.html
-Source0:        https://gitlab.com/rastersoft/devedeng/repository/archive.tar.gz?ref=%{version}#/%{name}-%{version}.tar.gz
+Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        devede_ng.py.appdata.xml
 
 BuildArch:      noarch
@@ -48,7 +46,7 @@ to expand it and easily add new features.
 
 
 %prep
-%autosetup -n %{name}-%{version}-%{commit}
+%autosetup -n %{name}-%{version}
 
 
 %build
@@ -102,6 +100,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Fri Feb 01 2019 Andrea Musuruane <musuruan@gmail.com> - 4.13.0-1
+- Updated to new upstream release
+
 * Sun Sep 30 2018 Leigh Scott <leigh123linux@googlemail.com> - 4.12.0-4
 - Require genisoimage as mkisofs virtual provides was removed
 
