@@ -1,9 +1,9 @@
 Name:           devedeng
-Version:        4.15.0
-Release:        3%{?dist}
+Version:        4.16.0
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
-License:        GPLv3+
+License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        devede_ng.py.appdata.xml
@@ -100,6 +100,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sun Oct 20 2019 Andrea Musuruane <musuruan@gmail.com> - 4.16.0-1
+- Updated to new upstream release
+- Changed license to GPLv3 only
+
 * Sat Aug 24 2019 Leigh Scott <leigh123linux@gmail.com> - 4.15.0-3
 - Rebuild for python-3.8
 
