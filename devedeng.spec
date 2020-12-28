@@ -1,6 +1,6 @@
 Name:           devedeng
 Version:        4.16.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
@@ -17,15 +17,12 @@ BuildRequires:  python3-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
-#Requires:       mplayer
-#Requires:       mpv
-Requires:       vlc
+Requires:       (vlc or mpv or mplayer)
 Requires:       ffmpeg
 Requires:       dvdauthor
 Requires:       vcdimager
 Requires:       genisoimage
-Requires:       brasero
-#Requires:       k3b
+Requires:       (brasero or k3b)
 Requires:       ImageMagick
 Requires:       python3-urllib3 
 Requires:       python3-gobject
@@ -100,6 +97,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Mon Dec 28 13:32:51 CET 2020 Andrea Musuruane <musuruan@gmail.com> - 4.16.0-5
+- Used boolean operators in Requires (BZ #5879)
+
 * Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 4.16.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
