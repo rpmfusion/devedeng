@@ -1,6 +1,6 @@
 Name:           devedeng
 Version:        4.16.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
@@ -17,12 +17,14 @@ BuildRequires:  python3-devel
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
-Requires:       (vlc or mpv or mplayer)
+#Requires:       (vlc or mpv or mplayer)
+Requires:       vlc
 Requires:       ffmpeg
 Requires:       dvdauthor
 Requires:       vcdimager
 Requires:       genisoimage
-Requires:       (brasero or k3b)
+Requires:       (brasero or k3b or xfburn)
+Requires:       brasero
 Requires:       ImageMagick
 Requires:       python3-urllib3 
 Requires:       python3-gobject
@@ -97,6 +99,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sat Jan  2 16:28:31 CET 2021 Andrea Musuruane <musuruan@gmail.com> - 4.16.0-6
+- Reverted the use of boolean operators in Requires (BZ #5879)
+
 * Mon Dec 28 13:32:51 CET 2020 Andrea Musuruane <musuruan@gmail.com> - 4.16.0-5
 - Used boolean operators in Requires (BZ #5879)
 
