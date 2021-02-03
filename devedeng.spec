@@ -1,6 +1,6 @@
 Name:           devedeng
 Version:        4.16.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
@@ -99,6 +99,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Wed Feb 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 4.16.0-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Wed Jan  6 10:20:42 CET 2021 Andrea Musuruane <musuruan@gmail.com> - 4.16.0-7
 - Reverted the use of boolean operators in Requires (BZ #5879)
 
