@@ -1,12 +1,11 @@
 Name:           devedeng
-Version:        4.16.0
-Release:        11%{?dist}
+Version:        4.17.0
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
-Source1:        devede_ng.py.appdata.xml
 
 BuildArch:      noarch
 
@@ -76,9 +75,9 @@ rm %{buildroot}%{_datadir}/pixmaps/%{name}.svg
 install -p -m 644 HISTORY.md %{buildroot}%{_pkgdocdir}
 install -p -m 644 README.md %{buildroot}%{_pkgdocdir}
 
-# Install AppData file
-install -d %{buildroot}%{_datadir}/metainfo
-install -p -m 644 %{SOURCE1} %{buildroot}%{_datadir}/metainfo
+# Fix AppData file
+mv %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml \
+  %{buildroot}%{_datadir}/metainfo/devede_ng.py.appdata.xml
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
 
 %find_lang %{name}
@@ -99,6 +98,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sat Mar 05 2022 Andrea Musuruane <musuruan@gmail.com> - 4.17.0-1
+- Updated to new upstream release
+
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 4.16.0-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
