@@ -6,6 +6,7 @@ Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:         temporary_python312_fix.patch
 
 BuildArch:      noarch
 
@@ -13,6 +14,7 @@ Provides:       devede = %{version}-%{release}
 Obsoletes:      devede < 4.0
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
@@ -44,7 +46,7 @@ to expand it and easily add new features.
 
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 
 %build
