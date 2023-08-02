@@ -1,6 +1,6 @@
 Name:           devedeng
 Version:        4.17.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
@@ -100,6 +100,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Wed Aug 02 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 4.17.0-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
 * Sat Jul 08 2023 Leigh Scott <leigh123linux@gmail.com> - 4.17.0-4
 - Rebuilt for Python 3.12
 
