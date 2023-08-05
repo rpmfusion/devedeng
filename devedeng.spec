@@ -1,12 +1,11 @@
 Name:           devedeng
 Version:        4.17.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0:         temporary_python312_fix.patch
 
 BuildArch:      noarch
 
@@ -100,6 +99,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Sat Aug 05 2023 Leigh Scott <leigh123linux@gmail.com> - 4.17.0-6
+- Drop patch
+
 * Wed Aug 02 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 4.17.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
