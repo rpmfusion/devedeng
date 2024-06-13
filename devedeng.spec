@@ -1,6 +1,6 @@
 Name:           devedeng
 Version:        4.18.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
@@ -99,6 +99,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Thu Jun 13 2024 Leigh Scott <leigh123linux@gmail.com> - 4.18.0-2
+- Rebuilt for Python 3.13
+
 * Fri Feb 09 2024 Sérgio Basto <sergio@serjux.com> - 4.18.0-1
 - Update devedeng to 4.18.0
 
