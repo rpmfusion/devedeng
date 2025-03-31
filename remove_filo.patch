@@ -1,0 +1,142 @@
+From a959d120ccb4da22db3a41d86014a3d8bbb2e43f Mon Sep 17 00:00:00 2001
+From: Sergio Costas <rastersoft@gmail.com>
+Date: Tue, 13 Aug 2024 22:17:52 +0200
+Subject: [PATCH] Remove FIFO filter
+
+It has been removed from ffmpeg
+---
+ src/devedeng/avconv.py | 18 +++++++++---------
+ src/devedeng/ffmpeg.py | 18 +++++++++---------
+ 2 files changed, 18 insertions(+), 18 deletions(-)
+
+diff --git a/src/devedeng/avconv.py b/src/devedeng/avconv.py
+index 14183c2..9b34c56 100644
+--- a/src/devedeng/avconv.py
++++ b/src/devedeng/avconv.py
+@@ -180,25 +180,25 @@ class avconv(devedeng.avbase.avbase):
+ 
+             if (file_project.prerotation == 90):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=1"
+             elif (file_project.prerotation == -90) or (file_project.prerotation == 270):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=2"
+             elif (file_project.prerotation == 180):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 vflip = not vflip
+                 hflip = not hflip
+ 
+             if (file_project.rotation == "rotation_90"):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=1"
+             elif (file_project.rotation == "rotation_270"):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=2"
+             elif (file_project.rotation == "rotation_180"):
+                 vflip = not vflip
+@@ -211,16 +211,16 @@ class avconv(devedeng.avbase.avbase):
+ 
+             if (vflip):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "vflip"
+             if (hflip):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "hflip"
+ 
+             if (file_project.width_midle != file_project.original_width) or (file_project.height_midle != file_project.original_height):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 x = int((file_project.width_midle -
+                          file_project.original_width) / 2)
+                 y = int((file_project.height_midle -
+@@ -234,7 +234,7 @@ class avconv(devedeng.avbase.avbase):
+ 
+             if (file_project.width_final != file_project.width_midle) or (file_project.height_final != file_project.height_midle):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 if self.major_version < 11:
+                     cmd_line += "scale=" + \
+                         str(file_project.width_final) + ":" + \
+diff --git a/src/devedeng/ffmpeg.py b/src/devedeng/ffmpeg.py
+index 8694ac2..283c1b7 100644
+--- a/src/devedeng/ffmpeg.py
++++ b/src/devedeng/ffmpeg.py
+@@ -180,25 +180,25 @@ class ffmpeg(devedeng.executor.executor):
+ 
+             if (file_project.prerotation == 90):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=1"
+             elif (file_project.prerotation == -90) or (file_project.prerotation == 270):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=2"
+             elif (file_project.prerotation == 180):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 vflip = not vflip
+                 hflip = not hflip
+ 
+             if (file_project.rotation == "rotation_90"):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=1"
+             elif (file_project.rotation == "rotation_270"):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "transpose=2"
+             elif (file_project.rotation == "rotation_180"):
+                 vflip = not vflip
+@@ -211,16 +211,16 @@ class ffmpeg(devedeng.executor.executor):
+ 
+             if (vflip):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "vflip"
+             if (hflip):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "hflip"
+ 
+             if (file_project.width_midle != file_project.original_width) or (file_project.height_midle != file_project.original_height):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 x = int((file_project.width_midle - file_project.original_width) / 2)
+                 y = int((file_project.height_midle - file_project.original_height) / 2)
+                 if (x > 0) or (y > 0):
+@@ -230,7 +230,7 @@ class ffmpeg(devedeng.executor.executor):
+ 
+             if (file_project.width_final != file_project.width_midle) or (file_project.height_final != file_project.height_midle):
+                 if (cmd_line != ""):
+-                    cmd_line += ",fifo,"
++                    cmd_line += ","
+                 cmd_line += "scale=" + \
+                     str(file_project.width_final) + ":" + \
+                     str(file_project.height_final)
+-- 
+GitLab
+

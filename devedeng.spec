@@ -1,12 +1,14 @@
 Name:           devedeng
 Version:        4.18.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
-
+# filo was removed in ffmpeg-7.0
+# https://gitlab.com/rastersoft/devedeng/-/commit/a959d120ccb4da22db3a41d86014a3d8bbb2e43f
+Patch0:         remove_filo.patch
 BuildArch:      noarch
 
 Provides:       devede = %{version}-%{release}
@@ -99,6 +101,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Mon Mar 31 2025 Leigh Scott <leigh123linux@gmail.com> - 4.18.0-5
+- filo was removed in ffmpeg-7.0 (rfbz#7205)
+
 * Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 4.18.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
