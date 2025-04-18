@@ -1,21 +1,17 @@
 Name:           devedeng
-Version:        4.18.0
-Release:        5%{?dist}
+Version:        4.21.0
+Release:        1%{?dist}
 Summary:        A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License:        GPLv3
 URL:            http://www.rastersoft.com/programas/devede.html
 Source0:        https://gitlab.com/rastersoft/devedeng/-/archive/%{version}/%{name}-%{version}.tar.gz
-# filo was removed in ffmpeg-7.0
-# https://gitlab.com/rastersoft/devedeng/-/commit/a959d120ccb4da22db3a41d86014a3d8bbb2e43f
-Patch0:         remove_filo.patch
 BuildArch:      noarch
 
 Provides:       devede = %{version}-%{release}
 Obsoletes:      devede < 4.0
 
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
 BuildRequires:  gettext
 BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
@@ -47,60 +43,57 @@ to expand it and easily add new features.
 
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -n %{name}-%{version}
+
+%generate_buildrequires
+%pyproject_buildrequires
 
 
 %build
-%py3_build
-
-# Remove shebang from Python libraries
-for lib in build/lib/devedeng/*.py; do
-  sed '1{\@^#!/usr/bin/env python@d}' $lib > $lib.new &&
-  touch -r $lib $lib.new &&
-  mv $lib.new $lib
-done
+%pyproject_wheel
 
 
 %install
-%py3_install 
+%pyproject_install
+%pyproject_save_files devedeng copy_files_verbose
+
+# Remove shebang from Python libraries
+for lib in `find %{buildroot}/%{python3_sitelib}/ -name '*.py'`; do
+  sed -i '1{\@^#!/usr/bin/env python@d}' $lib
+done
 
 # Fix desktop file 
 desktop-file-install \
   --delete-original \
   --add-category X-OutputGeneration \
+  --set-icon devedeng_icon \
   --dir %{buildroot}%{_datadir}/applications \
-  %{buildroot}%{_datadir}/applications/devede_ng.py.desktop
+  %{buildroot}%{_datadir}/applications/devede_ng.desktop
 
-# Remove icon
-rm %{buildroot}%{_datadir}/pixmaps/%{name}.svg
+# Install AppData file
+install -d -m 755 %{buildroot}%{_datadir}/metainfo
+install -p -m 644 src/devedeng/data/com.rastersoft.%{name}.appdata.xml \
+  %{buildroot}%{_datadir}/metainfo
 
-# Add docs
-install -p -m 644 HISTORY.md %{buildroot}%{_pkgdocdir}
-install -p -m 644 README.md %{buildroot}%{_pkgdocdir}
-
-# Fix AppData file
-mv %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml \
-  %{buildroot}%{_datadir}/metainfo/devede_ng.py.appdata.xml
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
+# Validate AppData file
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/com.rastersoft.%{name}.appdata.xml
 
 %find_lang %{name}
 
 
-%files -f %{name}.lang
-%{_bindir}/devede_ng.py
-%{_bindir}/copy_files_verbose.py
-%{_datadir}/%{name}
-%{python3_sitelib}/%{name}*.egg-info
-%{python3_sitelib}/%{name}
-%{_datadir}/metainfo/devede_ng.py.appdata.xml
-%{_datadir}/applications/devede_ng.py.desktop
-%{_datadir}/icons/hicolor/scalable/apps/*.svg
-%exclude %{_mandir}/man1/devede.1*
-%doc %{_docdir}/%{name}
+%files -f %{name}.lang -f %{pyproject_files}
+%{_bindir}/devede_ng
+%{_datadir}/metainfo/com.rastersoft.%{name}.appdata.xml
+%{_datadir}/applications/devede_ng.desktop
+%{_datadir}/icons/hicolor/scalable/apps/%{name}_icon.svg
+%doc HISTORY.md README.md
 %license COPYING
 
 
 %changelog
+* Thu Apr 03 2025 Andrea Musuruane <musuruan@gmail.com> - 4.21.0-1
+- Update devedeng to 4.21.0 (BZ #7205)
+
 * Mon Mar 31 2025 Leigh Scott <leigh123linux@gmail.com> - 4.18.0-5
 - filo was removed in ffmpeg-7.0 (rfbz#7205)
 
